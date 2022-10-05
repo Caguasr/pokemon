@@ -38,7 +38,7 @@ const ListPokemon = ({navigation}) => {
         <View style={styles.root}>
             <StatusBar barStyle="light-content"></StatusBar>
             <View style={{marginTop: top + 20}}>
-                <Text style={{...styles.colorText, fontSize: 30, fontWeight:'bold'}}>POKEMON</Text>
+                <Text style={{...styles.colorText, fontSize: 30, fontWeight: 'bold'}}>POKEMON</Text>
                 <FlatList
                     data={getPokemon}
                     keyExtractor={(getPokemon) => getPokemon.name}
