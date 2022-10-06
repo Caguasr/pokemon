@@ -1,4 +1,4 @@
-import {ListPokemon} from './src/views';
+import {DetailPokemon, ListPokemon} from './src/views';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -11,6 +11,7 @@ export default function App() {
                     headerShown: false,
                 }}>
                 <Stack.Screen name="Pokemons" component={ListPokemon}></Stack.Screen>
+                <Stack.Screen name="Detail" component={DetailPokemon}></Stack.Screen>
             </Stack.Navigator>
         </NavigationContainer>
     );

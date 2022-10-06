@@ -1,9 +1,10 @@
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 
-const CardPokemon = ({image, name, id}) => {
+const CardPokemon = ({image, name, id, navigation}) => {
     return (
-        <TouchableOpacity style={styles.root}>
+        <TouchableOpacity style={styles.root}
+                          onPress={() => navigation.navigate('Detail', {name, image, id})}>
             <Text style={styles.textTitle}>{name}</Text>
             <Text style={{...styles.textTitle, fontSize: 17}}>#{id}</Text>
             <Image source={{uri: image}} style={styles.image}></Image>

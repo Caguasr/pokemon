@@ -3,12 +3,11 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {CardPokemon} from './components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {IMAGE_POKEMON, URL_POKEMON} from '../../types/variables';
 
 
 const ListPokemon = ({navigation}) => {
 
-    const URL_POKEMON = 'https://pokeapi.co/api/v2/pokemon'
-    const IMAGE_POKEMON = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'
 
     const [getPokemon, setPokemon] = useState([])
     const [getUrl, setUrl] = useState(URL_POKEMON)
@@ -42,7 +41,8 @@ const ListPokemon = ({navigation}) => {
                 <FlatList
                     data={getPokemon}
                     keyExtractor={(getPokemon) => getPokemon.name}
-                    renderItem={({item}) => (<CardPokemon image={item.image} name={item.name} id={item.id}/>)}
+                    renderItem={({item}) => (
+                        <CardPokemon image={item.image} name={item.name} id={item.id} navigation={navigation}/>)}
                     onEndReached={getDataPokemon}
                     onEndReachedThreshold={0.4}
                     ListFooterComponent={<ActivityIndicator style={{height: 100}} color={'#fff'}
