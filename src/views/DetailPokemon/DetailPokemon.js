@@ -3,20 +3,24 @@ import {Ionicons} from '@expo/vector-icons';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {URL_POKEMON} from '../../types/variables';
+import {InfoPokemon} from './components';
 
 
 const DetailPokemon = ({navigation, route}) => {
     const {name, image, id} = route.params;
+
     const [getDetail, setDetail] = useState({})
-    const [getLoanding, setLoading] = useState(true)
+    const [getLoading, setLoading] = useState(true)
+
+
     const getFetchDetail = async () => {
         const {data} = await axios.get(`${URL_POKEMON}/${id}`);
-        console.log(data.types)
         setDetail(data)
         setTimeout(() => {
             setLoading(false)
         }, 2000)
     }
+
     useEffect(() => {
         getFetchDetail()
     }, [])
@@ -30,20 +34,10 @@ const DetailPokemon = ({navigation, route}) => {
             </View>
             <ScrollView style={styles.detail}>
                 {
-                    getLoanding ? (
+                    getLoading ? (
                         <ActivityIndicator color={'#fff'} size={30} style={styles.loading}></ActivityIndicator>
-                    ) : (
-                        <>
-                            <Text style={{...styles.title, marginTop: 20, marginLeft: 20}}>Tipo</Text>
-                            <Text style={{
-                                ...styles.title,
-                                marginLeft: 20,
-                                fontSize: 15
-                            }}>{getDetail.types[0].type.name}</Text>
-                        </>
-                    )
+                    ) : (<InfoPokemon detail={getDetail}/>)
                 }
-
             </ScrollView>
         </>
     )
@@ -83,12 +77,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         borderTopRightRadius: 50,
         borderTopLeftRadius: 50,
-    },
-    title: {
-        color: '#fff',
-        fontSize: 20,
-        fontWeight: 'bold',
-        textTransform: 'capitalize'
     },
     loading: {
         alignItems: 'center',
